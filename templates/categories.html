@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Categories - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- Page Heading -->
+
+    <h2 class="page-title">
+        <i class="bi bi-grid"></i>
+        Browse Categories
+    </h2>
+
+<!-- Category Search -->
+
+<div class="tn-card p-3 mb-4">
+
+    <div class="input-group">
+
+        <span class="input-group-text bg-white">
+            <i class="bi bi-search"></i>
+        </span>
+
+        <input type="text"
+               id="categorySearch"
+               class="form-control"
+               placeholder="Search categories...">
+
+    </div>
+
+</div>
+
+
+    <!-- Categories -->
+
+    <div class="categories-grid">
+
+{% for cat in categories %}
+
+<div class="category-item">
+
+<a href="{{ url_for('category_students', category_id=cat.id) }}"
+   class="text-decoration-none">
+
+            <div class="category-page-card">
+
+                {% if cat.image %}
+
+                    <img src="{{ url_for('static', filename='uploads/' + cat.image) }}"
+                         alt="{{ cat.category_name }}">
+
+                {% else %}
+
+                    <div class="category-page-card-img-placeholder">
+                        <i class="bi bi-image"></i>
+                    </div>
+
+                {% endif %}
+
+
+                <div class="category-page-card-content">
+
+                    <h4>
+                        {{ cat.category_name }}
+                    </h4>
+
+                    {% if cat.description %}
+
+                        <p class="category-description">
+                            {{ cat.description }}
+                        </p>
+
+                    {% endif %}
+
+                   
+
+                </div>
+
+            </div>
+
+        </a>
+</div>
+        {% else %}
+
+            <p class="text-muted">
+                No categories available yet.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById("categorySearch").addEventListener("keyup", function () {
+
+    const searchValue = this.value.toLowerCase();
+
+    document.querySelectorAll(".category-item").forEach(function (item) {
+
+        const categoryName = item.textContent.toLowerCase();
+
+        if (categoryName.includes(searchValue)) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+
+    });
+
+});
+</script>
+
+{% endblock %}

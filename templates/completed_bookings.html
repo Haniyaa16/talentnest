@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Completed Bookings - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-box-seam"></i> Completed Bookings
+    </h3>
+
+    <p class="page-subtitle">
+        View the services you have successfully completed.
+    </p>
+
+
+    <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+        {% for b in bookings %}
+
+        <div class="col">
+
+            <div class="tn-card p-3 h-100">
+
+                <span class="badge badge-delivered mb-2">
+                    Delivered
+                </span>
+
+                <h5 class="mb-2">
+                    {{ b.service_name }}
+                </h5>
+
+                <p class="mb-1">
+                    <i class="bi bi-person"></i>
+                    {{ b.client_name }}
+                </p>
+
+                <p class="mb-1">
+                    <i class="bi bi-calendar-event"></i>
+                    Required: {{ b.required_date }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="tn-card p-4 text-center">
+
+                <i class="bi bi-box-seam fs-1 text-secondary"></i>
+
+                <p class="text-muted mt-2 mb-0">
+                    No completed bookings yet.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

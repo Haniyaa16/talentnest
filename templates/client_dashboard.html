@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Client Dashboard - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="client-dashboard">
+
+    <!-- ================= WELCOME ================= -->
+
+<div class="dashboard-header">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+        <div>
+
+            <h2>
+                <i class="bi bi-speedometer2"></i>
+                Welcome, {{ current_name }}
+            </h2>
+
+            <p class="mb-0">
+                Find talented students and explore creative products and services.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- ================= BOOKING STATUS ================= -->
+
+    <div class="dashboard-stats">
+
+        <div class="dashboard-stat-card">
+
+            <i class="bi bi-hourglass-split"></i>
+
+            <h3>{{ counts.Pending }}</h3>
+
+            <span>Pending</span>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <i class="bi bi-check-circle"></i>
+
+            <h3>{{ counts.Accepted }}</h3>
+
+            <span>Accepted</span>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <i class="bi bi-x-circle"></i>
+
+            <h3>{{ counts.Rejected }}</h3>
+
+            <span>Rejected</span>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <i class="bi bi-box-seam"></i>
+
+            <h3>{{ counts.Delivered }}</h3>
+
+            <span>Delivered</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= EXPLORE TALENT ================= -->
+
+    <section class="explore-talent">
+
+        <div class="explore-header">
+
+            <div>
+
+                <h3>
+                    <i class="bi bi-stars"></i>
+                    Explore Student Talent
+                </h3>
+
+                <p>
+                    Discover creative products and services from talented students.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('categories_list') }}"
+               class="explore-link">
+                View all
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="category-pills">
+
+            {% for cat in categories %}
+
+                <a href="{{ url_for('category_students', category_id=cat.id) }}"
+                   class="category-pill">
+
+                    <i class="bi bi-sparkles"></i>
+
+                    {{ cat.category_name }}
+
+                </a>
+
+            {% else %}
+
+                <p class="text-muted">
+                    No categories available yet.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</div>
+
+{% if delivered_booking %}
+
+<!-- ================= DELIVERY NOTIFICATION ================= -->
+
+<div class="modal fade" id="deliveryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+
+            <div class="modal-body p-4">
+
+                <i class="bi bi-check-circle-fill"
+                   style="font-size: 50px; color: #6C3EB8;"></i>
+
+                <h4 class="mt-3">
+                    Your service has been delivered!
+                </h4>
+
+                <p class="text-muted">
+                    Your order for
+                    <strong>{{ delivered_booking.service_name }}</strong>
+                    has been delivered successfully.
+                </p>
+
+                <p>
+                    Please take a moment to rate and review the service.
+                </p>
+
+                <a href="{{ url_for('review', booking_id=delivered_booking.id) }}"
+                   class="btn btn-tn-primary">
+                    <i class="bi bi-star-fill"></i>
+                    Review Now
+                </a>
+
+                <button type="button"
+                        class="btn btn-outline-secondary ms-2"
+                        data-bs-dismiss="modal">
+                    Later
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const deliveryModal =
+        new bootstrap.Modal(document.getElementById("deliveryModal"));
+
+    deliveryModal.show();
+
+});
+</script>
+
+{% endif %}
+
+
+
+{% endblock %}

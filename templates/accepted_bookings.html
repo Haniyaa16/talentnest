@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Accepted Bookings - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-check2-circle"></i> Accepted Bookings
+    </h3>
+
+    <p class="page-subtitle">
+        Manage the bookings you have accepted.
+    </p>
+
+    <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+        {% for b in bookings %}
+
+        <div class="col">
+
+            <div class="tn-card p-3 h-100 d-flex flex-column">
+
+                <span class="badge badge-accepted align-self-start mb-2">
+                    Status: Accepted
+                </span>
+
+                <h5 class="mb-2">{{ b.service_name }}</h5>
+
+                <p class="mb-1">
+                    <i class="bi bi-person"></i>
+                    {{ b.client_name }}
+                </p>
+
+                <p class="mb-1">
+                    <i class="bi bi-telephone"></i>
+                    {{ b.client_phone }}
+                </p>
+
+                <p class="mb-1">
+                    <i class="bi bi-calendar-event"></i>
+                    Required: {{ b.required_date }}
+                </p>
+                <p class="mb-1">
+                    <i class="bi bi-building"></i>
+                    {{ b.client_college or 'Oxford College' }}
+                </p>
+
+                <p class="mb-1">
+                    <i class="bi bi-mortarboard"></i>
+                    {{ b.client_year_sem or '-' }} - {{ b.client_branch or '-' }}
+                </p>
+
+                <p class="mb-1">
+                    <i class="bi bi-geo-alt"></i>
+                    {{ b.client_location or 'Kozhikode' }}
+                </p>
+
+                {% if b.message %}
+                <p class="mb-1">
+                    <i class="bi bi-chat-left-text"></i>
+                    {{ b.message }}
+                </p>
+                {% endif %}
+
+                {% if b.reference_image %}
+                <img src="{{ url_for('static', filename='uploads/' + b.reference_image) }}"
+                     class="rounded my-2"
+                     style="width:100%; height:140px; object-fit:cover;"
+                     alt="Reference image">
+                {% endif %}
+
+                <form method="POST"
+                      action="{{ url_for('delivery_done', booking_id=b.id) }}"
+                      class="mt-auto pt-3">
+
+                    <button type="submit"
+                            class="btn btn-tn-primary btn-sm w-100">
+
+                        <i class="bi bi-box-seam"></i>
+                        Delivery Done
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="tn-card p-4 text-center">
+
+                <i class="bi bi-calendar-x fs-1 text-secondary"></i>
+
+                <p class="text-muted mt-2 mb-0">
+                    No accepted bookings at the moment.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Review Service - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-star"></i>
+        Review Service
+    </h3>
+
+    <p class="page-subtitle">
+        Share your experience with this specific service.
+    </p>
+
+
+    <div class="tn-card p-4">
+
+        <!-- BOOKED SERVICE DETAILS -->
+
+        <div class="mb-4">
+
+            <p class="mb-2">
+                <strong>Service / Item:</strong>
+                {{ booking.service_name }}
+            </p>
+
+            <p class="mb-0">
+                <strong>Student:</strong>
+                {{ booking.student_name }}
+            </p>
+
+        </div>
+
+
+        <form method="POST"
+              action="{{ url_for('review', booking_id=booking.id) }}">
+
+            <!-- RATING -->
+
+            <div class="mb-4">
+
+                <label class="form-label d-block">
+                    Rating
+                </label>
+
+                <div id="starRating"
+                     class="fs-2"
+                     style="cursor:pointer;">
+
+                    {% for i in range(5) %}
+
+                        <i class="bi bi-star"
+                           data-rating="{{ i + 1 }}"></i>
+
+                    {% endfor %}
+
+                </div>
+
+                <input type="hidden"
+                       id="ratingInput"
+                       name="rating"
+                       value=""
+                       required>
+
+            </div>
+
+
+            <!-- COMMENT -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Comment
+                </label>
+
+                <textarea class="form-control"
+                          name="comment"
+                          rows="4"
+                          placeholder="Share your experience with this service..."></textarea>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit"
+                    class="btn btn-tn-primary">
+
+                <i class="bi bi-send-check"></i>
+                Submit Review
+
+            </button>
+
+            <a href="{{ url_for('my_bookings') }}"
+               class="btn btn-outline-secondary ms-2">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- STAR RATING SCRIPT -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const stars = document.querySelectorAll("#starRating i");
+    const ratingInput = document.getElementById("ratingInput");
+
+    stars.forEach(function (star) {
+
+        star.addEventListener("click", function () {
+
+            const rating = parseInt(
+                this.getAttribute("data-rating")
+            );
+
+            ratingInput.value = rating;
+
+            stars.forEach(function (s, index) {
+
+                if (index < rating) {
+
+                    s.classList.remove("bi-star");
+                    s.classList.add("bi-star-fill");
+
+                } else {
+
+                    s.classList.remove("bi-star-fill");
+                    s.classList.add("bi-star");
+
+                }
+
+            });
+
+        });
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

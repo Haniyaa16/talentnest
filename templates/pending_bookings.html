@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}Pending Bookings - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="mb-4">
+        <h2 class="page-title mb-1">
+            <i class="bi bi-hourglass-split"></i>
+            Pending Bookings
+        </h2>
+
+        <p class="page-subtitle">
+            Review and manage your incoming booking requests.
+        </p>
+    </div>
+
+
+    <!-- BOOKINGS -->
+
+    {% if bookings %}
+
+    <div class="row g-4">
+
+        {% for booking in bookings %}
+
+        <!-- 3 CARDS PER ROW -->
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+            <div class="pending-booking-card h-100">
+
+                <!-- CARD TOP -->
+                <div class="pending-card-top">
+
+                    <div class="booking-icon">
+                        <i class="bi bi-calendar-heart"></i>
+                    </div>
+
+                    <span class="pending-badge">
+                        Pending
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE NAME -->
+                <h5 class="pending-service-title">
+                   {{ booking.service_name }}
+                </h5>
+
+
+                <!-- CLIENT -->
+                <div class="booking-client">
+
+                    <div class="client-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
+
+                    <div>
+                        <small>Client</small>
+                        <strong>{{ booking.client_name }}</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- DETAILS -->
+
+                <div class="booking-details">
+
+                    <div class="booking-detail">
+                        <i class="bi bi-telephone"></i>
+
+                        <div>
+                            <small>Phone</small>
+                            <span>{{ booking.client_phone }}</span>
+                        </div>
+                    </div>
+
+
+<div class="booking-detail">
+    <i class="bi bi-calendar-event"></i>
+
+    <div>
+        <small>Booking Date</small>
+        <span>{{ booking.required_date or 'Not provided' }}</span>
+    </div>
+</div>
+
+
+<div class="booking-detail">
+    <i class="bi bi-building"></i>
+
+    <div>
+        <small>College</small>
+        <span>{{ booking.client_college or 'Not provided' }}</span>
+    </div>
+</div>
+
+<div class="booking-detail">
+    <i class="bi bi-mortarboard"></i>
+
+    <div>
+        <small>Year / Semester</small>
+        <span>{{ booking.client_year_sem or 'Not provided' }}</span>
+    </div>
+</div>
+
+
+<div class="booking-detail">
+    <i class="bi bi-book"></i>
+
+    <div>
+        <small>Branch / Department</small>
+        <span>{{ booking.client_branch or 'Not provided' }}</span>
+    </div>
+</div>
+
+
+<div class="booking-detail">
+    <i class="bi bi-geo-alt"></i>
+
+    <div>
+        <small>Location</small>
+        <span>{{ booking.client_location or 'Not provided' }}</span>
+    </div>
+</div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                {% if booking.message %}
+
+                <div class="booking-message">
+
+                    <div class="message-title">
+                        <i class="bi bi-chat-left-text"></i>
+                        Message
+                    </div>
+
+                    <p>
+                        {{ booking.message }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- REFERENCE IMAGE -->
+
+                {% if booking.reference_image %}
+
+                <div class="reference-section">
+
+                    <div class="message-title">
+                        <i class="bi bi-image"></i>
+                        Reference Image
+                    </div>
+
+                    <img src="{{ url_for('static', filename='uploads/' + booking.reference_image) }}"
+                         class="reference-image"
+                         alt="Reference Image">
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- BOOKING REFERENCE -->
+
+                {% if booking.reference %}
+
+                <div class="booking-reference">
+
+                    <i class="bi bi-hash"></i>
+
+                    {{ booking.reference }}
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="booking-actions">
+
+                    <form method="POST"
+                          action="{{ url_for('accept_booking', booking_id=booking.id) }}">
+
+                        <button type="submit"
+                                class="accept-booking-btn">
+
+                            <i class="bi bi-check-circle"></i>
+                            Accept
+
+                        </button>
+
+                    </form>
+
+
+                    <form method="POST"
+                          action="{{ url_for('reject_booking', booking_id=booking.id) }}">
+
+                        <button type="submit"
+                                class="reject-booking-btn">
+
+                            <i class="bi bi-x-circle"></i>
+                            Reject
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+
+    <div class="empty-bookings-card">
+
+        <div class="empty-booking-icon">
+            <i class="bi bi-calendar-x"></i>
+        </div>
+
+        <h4>
+            No Pending Bookings
+        </h4>
+
+        <p>
+            You don't have any pending booking requests at the moment.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

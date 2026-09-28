@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}
+TalentNest - Student Talent Marketplace
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <h1>
+                Discover Student Talent,<br>
+                Share Creativity.
+            </h1>
+
+            <p>
+                Buy handmade products and book creative services
+                offered by talented students.
+            </p>
+
+            <div class="hero-actions">
+
+                {% if not current_role %}
+
+                    <a href="{{ url_for('register') }}"
+                       class="btn hero-btn">
+                        Join TalentNest
+                    </a>
+
+
+                {% else %}
+
+                    <a href="{{ url_for('dashboard_redirect') }}"
+                       class="btn hero-btn">
+                        Go to Dashboard
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-it-works" id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <h2>How TalentNest Works</h2>
+
+            <p>
+                Book student talents in just three simple steps.
+            </p>
+
+        </div>
+
+
+        <div class="steps-wrapper">
+
+            <div class="step-item">
+
+                <div class="step-circle">
+                    1
+                </div>
+
+                <h5>Browse</h5>
+
+                <p>
+                    Explore categories like cakes, drawings,
+                    bracelets, crafts and more.
+                </p>
+
+            </div>
+
+
+            <div class="step-line"></div>
+
+
+            <div class="step-item">
+
+                <div class="step-circle">
+                    2
+                </div>
+
+                <h5>Book</h5>
+
+                <p>
+                    Select a student, mention your requirements,
+                    and send a booking request.
+                </p>
+
+            </div>
+
+
+            <div class="step-line"></div>
+
+
+            <div class="step-item">
+
+                <div class="step-circle">
+                    3
+                </div>
+
+                <h5>Receive</h5>
+
+                <p>
+                    Track your booking status and receive
+                    the product or service.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY CHOOSE TALENTNEST ================= -->
+
+<section class="why-choose">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <h2>Why Choose TalentNest?</h2>
+
+            <p>
+                Connecting creativity with opportunity.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🎓
+                    </div>
+
+                    <h5>Student Talent</h5>
+
+                    <p>
+                        Support talented students by purchasing
+                        their creative products and services.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        💡
+                    </div>
+
+                    <h5>Easy Process</h5>
+
+                    <p>
+                        Find a student, send a booking request,
+                        and manage your booking easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⭐
+                    </div>
+
+                    <h5>Trusted Students</h5>
+
+                    <p>
+                        View student profiles and available
+                        services before making a booking.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🏆
+                    </div>
+
+                    <h5>Easy Booking</h5>
+
+                    <p>
+                        Simple booking with clear status updates
+                        throughout the process.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
