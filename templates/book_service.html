@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Book {{ service.service_name }} - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-calendar-check"></i> Book Service
+    </h3>
+
+    <p class="page-subtitle">
+        Enter the details below to book this service.
+    </p>
+
+    <div class="tn-card p-4">
+
+        <!-- SERVICE DETAILS -->
+
+        <div class="mb-4 p-3 rounded"
+             style="background-color: var(--tn-bg);">
+
+            <h5 class="mb-1">
+                {{ service.service_name }}
+            </h5>
+
+            <p class="text-muted mb-1">
+                <i class="bi bi-person"></i>
+                {{ service.student_name }}
+            </p>
+
+            <p class="fw-bold mb-0"
+               style="color: var(--tn-purple);">
+
+                &#8377;{{ service.price }}
+
+            </p>
+
+        </div>
+
+
+        <!-- BOOKING FORM -->
+
+        <form method="POST"
+              action="{{ url_for('book_service', service_id=service.id) }}"
+              enctype="multipart/form-data">
+
+
+            <!-- PHONE + DATE -->
+
+            <div class="row">
+
+                <!-- Phone -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Phone Number
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           name="phone"
+                           value="{{ client_phone }}"
+                           readonly>
+
+                </div>
+
+
+                <!-- Required Date -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Required Date
+                    </label>
+
+                    <input type="date"
+                           class="form-control"
+                           name="required_date"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <!-- COLLEGE + YEAR + BRANCH -->
+
+            <div class="row">
+
+                <!-- College -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        College
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           value="{{ client_profile.college }}"
+                           readonly>
+
+                </div>
+
+
+                <!-- Year / Semester -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Year / Semester
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           value="{{ client_profile.year_sem }}"
+                           readonly>
+
+                </div>
+
+
+                <!-- Branch -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Branch / Department
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           value="{{ client_profile.branch }}"
+                           readonly>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Location
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       value="{{ client_profile.location }}"
+                       readonly>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Special Instructions
+                </label>
+
+                <textarea class="form-control"
+                          name="message"
+                          rows="3"
+                          placeholder="Add any special instructions..."></textarea>
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Reference Image (optional)
+                </label>
+
+                <input type="file"
+                       class="form-control"
+                       name="reference_image"
+                       accept=".jpg,.jpeg,.png">
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button type="submit"
+                    class="btn btn-tn-primary">
+
+                <i class="bi bi-send-check"></i>
+                Submit Booking
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

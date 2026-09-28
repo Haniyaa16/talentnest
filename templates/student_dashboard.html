@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- Welcome -->
+    <div class="dashboard-header">
+
+        <h2>
+            <i class="bi bi-speedometer2"></i>
+            Welcome, {{ current_name }}
+        </h2>
+
+        <p>
+            Manage your services, bookings and student profile.
+        </p>
+
+    </div>
+
+
+    <!-- Profile Warning -->
+
+{% if not profile or not profile.graduation_year %}
+    <div class="profile-warning">
+        <i class="bi bi-exclamation-triangle"></i>
+
+        <span>
+            Your profile is incomplete.
+            <a href="{{ url_for('student_profile') }}">
+                Complete it now
+            </a>
+            so clients can find you.
+        </span>
+    </div>
+
+    {% endif %}
+
+
+    <!-- Statistics -->
+
+    <div class="student-dashboard-stats">
+
+        <div class="student-stat-card">
+
+            <div class="student-stat-icon">
+                <i class="bi bi-bag"></i>
+            </div>
+
+            <div>
+                <h3>{{ services_count }}</h3>
+                <span>My Services</span>
+            </div>
+
+        </div>
+
+
+        <div class="student-stat-card">
+
+            <div class="student-stat-icon">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+
+            <div>
+                <h3>{{ pending_count }}</h3>
+                <span>Pending Bookings</span>
+            </div>
+
+        </div>
+
+
+        <div class="student-stat-card">
+
+            <div class="student-stat-icon">
+                <i class="bi bi-check-circle"></i>
+            </div>
+
+            <div>
+                <h3>{{ accepted_count }}</h3>
+                <span>Accepted Bookings</span>
+            </div>
+
+        </div>
+
+
+        <div class="student-stat-card">
+
+            <div class="student-stat-icon">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <div>
+                <h3>{{ delivered_count }}</h3>
+                <span>Delivered</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+
+    <section class="quick-actions">
+
+        <div class="quick-actions-header">
+
+            <div>
+                <h3>
+                    <i class="bi bi-lightning-charge"></i>
+                    Quick Actions
+                </h3>
+
+                <p>
+                    Manage your TalentNest activities easily.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="quick-action-grid">
+
+            <a href="{{ url_for('student_profile') }}"
+               class="quick-action-card">
+
+                <i class="bi bi-person-badge"></i>
+
+                <div>
+                    <h5>Edit Profile</h5>
+                    <p>Update your student information</p>
+                </div>
+
+                <i class="bi bi-arrow-right action-arrow"></i>
+
+            </a>
+
+
+            <a href="{{ url_for('add_service') }}"
+               class="quick-action-card">
+
+                <i class="bi bi-plus-circle"></i>
+
+                <div>
+                    <h5>Add New Service</h5>
+                    <p>Offer your talent to clients</p>
+                </div>
+
+                <i class="bi bi-arrow-right action-arrow"></i>
+
+            </a>
+
+
+            <a href="{{ url_for('my_services') }}"
+               class="quick-action-card">
+
+                <i class="bi bi-bag"></i>
+
+                <div>
+                    <h5>My Services</h5>
+                    <p>View and manage your services</p>
+                </div>
+
+                <i class="bi bi-arrow-right action-arrow"></i>
+
+            </a>
+
+            <a href="{{ url_for('accepted_bookings') }}" class="quick-action-card">
+
+    <i class="bi bi-check2-circle"></i>
+
+    <div>
+        <h5>Accepted Bookings</h5>
+        <p>View your accepted bookings</p>
+    </div>
+
+    <i class="bi bi-chevron-right action-arrow"></i>
+
+</a>
+
+            <a href="{{ url_for('pending_bookings') }}"
+               class="quick-action-card">
+
+                <i class="bi bi-hourglass-split"></i>
+
+                <div>
+                    <h5>Pending Bookings</h5>
+                    <p>Review your booking requests</p>
+                </div>
+
+                <i class="bi bi-arrow-right action-arrow"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

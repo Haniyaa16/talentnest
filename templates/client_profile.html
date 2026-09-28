@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Client Profile - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7 col-lg-6">
+
+            <div class="tn-card p-4">
+
+                <!-- Header -->
+
+                <div class="text-center mb-4">
+
+
+
+                    <h2 class="mt-2">
+                        My Profile
+                    </h2>
+
+                    <p class="text-muted">
+                        Edit your profile information and manage ID verification.
+                    </p>
+
+                </div>
+
+
+                <!-- PROFILE FORM -->
+
+                <form method="POST"
+                      enctype="multipart/form-data">
+
+                    <!-- Name -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Full Name
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               name="full_name"
+                               value="{{ user.full_name }}"
+                               required>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input type="email"
+                               class="form-control"
+                               name="email"
+                               value="{{ user.email }}"
+                               required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Phone Number
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               name="phone"
+                               value="{{ user.phone }}"
+                               required>
+
+                    </div>
+
+                <!-- College -->
+
+<div class="mb-3">
+    <label class="form-label">College</label>
+
+    <input type="text"
+           class="form-control"
+           value="Oxford College"
+           readonly>
+</div>
+
+
+<!-- Branch -->
+
+<div class="mb-3">
+    <label class="form-label">Branch / Department</label>
+
+    <input type="text"
+           class="form-control"
+           name="branch"
+           value="{{ profile.branch if profile else '' }}"
+           required>
+</div>
+
+
+<!-- Year / Semester -->
+
+<div class="mb-3">
+    <label class="form-label">Year / Semester</label>
+
+    <input type="text"
+           class="form-control"
+           name="year_sem"
+           value="{{ profile.year_sem if profile else '' }}"
+           placeholder="e.g. 2nd Year / Sem 4"
+           required>
+</div>
+
+
+<!-- Location -->
+
+<div class="mb-3">
+    <label class="form-label">Location</label>
+
+    <input type="text"
+           class="form-control"
+           value="Kozhikode"
+           readonly>
+</div>
+                    <hr class="my-4">
+
+
+                    <!-- COLLEGE ID -->
+
+                    <h5 class="mb-3">
+
+                        <i class="bi bi-person-badge"></i>
+                        Oxford College ID Verification
+
+                    </h5>
+
+
+                    {% if user.college_id_card %}
+
+                        <!-- Current ID -->
+
+                        <div class="text-center mb-3">
+
+                            <img src="{{ url_for(
+                                'static',
+                                filename='uploads/' + user.college_id_card
+                            ) }}"
+                            class="img-fluid rounded border"
+                            style="
+                                max-width: 350px;
+                                max-height: 250px;
+                                object-fit: contain;
+                            "
+                            alt="Oxford College ID Card">
+
+                        </div>
+
+
+                        <!-- Verification Status -->
+
+                        <div class="text-center mb-3">
+
+                            {% if user.verification_status == "Pending" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    <i class="bi bi-hourglass-split"></i>
+                                    Verification Pending
+                                </span>
+
+                            {% elif user.verification_status == "Approved" %}
+
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                    ID Verified
+                                </span>
+
+                            {% elif user.verification_status == "Rejected" %}
+
+                                <span class="badge bg-danger">
+                                    <i class="bi bi-x-circle"></i>
+                                    ID Rejected
+                                </span>
+
+                                <p class="text-muted mt-2">
+                                    Please upload your ID card again.
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- Upload / Replace ID -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            {% if user.college_id_card %}
+                                Replace Oxford College ID Card
+                            {% else %}
+                                Upload Oxford College ID Card
+                            {% endif %}
+
+                        </label>
+
+                        <input type="file"
+                               class="form-control"
+                               name="college_id_card"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small class="text-muted">
+                            Upload a clear JPG, JPEG or PNG image.
+                        </small>
+
+                    </div>
+
+
+                    <!-- SAVE BUTTON -->
+
+                    <button type="submit"
+                            class="btn btn-tn-primary w-100">
+
+                        <i class="bi bi-save"></i>
+                        Save Changes
+
+                    </button>
+
+                </form>
+
+
+                <!-- Back -->
+
+                <div class="text-center mt-4">
+
+                    <a href="{{ url_for('client_dashboard') }}"
+                       class="text-decoration-none">
+
+                        <i class="bi bi-arrow-left"></i>
+                        Back to Dashboard
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

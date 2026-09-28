@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-speedometer2"></i> Admin Dashboard
+    </h3>
+
+    <p class="page-subtitle">
+        Overview of TalentNest users, services and bookings.
+    </p>
+
+
+    <!-- STATISTICS -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-6 col-md-3">
+            <div class="tn-stat-card text-center">
+                <i class="bi bi-mortarboard fs-3"></i>
+                <h3>{{ total_students }}</h3>
+                <small>Total Students</small>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="tn-stat-card text-center">
+                <i class="bi bi-people fs-3"></i>
+                <h3>{{ total_clients }}</h3>
+                <small>Total Clients</small>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="tn-stat-card text-center">
+                <i class="bi bi-bag-check fs-3"></i>
+                <h3>{{ total_services }}</h3>
+                <small>Total Services</small>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="tn-stat-card text-center">
+                <i class="bi bi-journal-text fs-3"></i>
+                <h3>{{ total_bookings }}</h3>
+                <small>Total Bookings</small>
+            </div>
+        </div>
+
+    </div>
+
+
+     <!-- ID VERIFICATION -->
+
+    <div class="tn-card p-3 mb-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h5 class="section-title mb-1">
+                    <i class="bi bi-person-badge"></i>
+                    College ID Verification
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Review and verify Student and Client college ID cards.
+                </p>
+            </div>
+                     <a href="{{ url_for('admin_verifications') }}"
+               class="btn btn-tn-primary">
+
+                <i class="bi bi-person-check"></i>
+                Verify IDs
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- RECENT BOOKINGS -->
+
+    <h5 class="section-title mb-3">
+        <i class="bi bi-clock-history"></i> Recent Bookings
+    </h5>
+
+    <div class="table-responsive tn-card p-3">
+
+        <table class="table align-middle mb-0">
+
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Client</th>
+                    <th>Student</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for b in recent_bookings %}
+
+                <tr>
+
+                    <td>{{ b.service_name }}</td>
+
+                    <td>{{ b.client_name }}</td>
+
+                    <td>{{ b.student_name }}</td>
+
+                    <td>
+
+                        {% if b.status == 'Pending' %}
+                            <span class="badge badge-pending">Pending</span>
+
+                        {% elif b.status == 'Accepted' %}
+                            <span class="badge badge-accepted">Accepted</span>
+
+                        {% elif b.status == 'Rejected' %}
+                            <span class="badge badge-rejected">Rejected</span>
+
+                        {% elif b.status == 'Delivered' %}
+                            <span class="badge badge-delivered">Delivered</span>
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4"
+                        class="text-muted text-center py-4">
+                        No bookings yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Categories - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-tags"></i> Manage Categories
+    </h3>
+
+    <p class="page-subtitle">
+        Add, edit and manage service categories.
+    </p>
+
+
+    <!-- ADD CATEGORY -->
+
+    <div class="tn-card p-4 mb-4">
+
+        <h5 class="mb-3">
+            <i class="bi bi-plus-circle"></i> Add New Category
+        </h5>
+
+        <form method="POST"
+              action="{{ url_for('manage_categories') }}"
+              enctype="multipart/form-data">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+                    <input type="text"
+                           class="form-control"
+                           name="category_name"
+                           placeholder="Category name"
+                           required>
+                </div>
+
+                <div class="col-md-4">
+                    <input type="text"
+                           class="form-control"
+                           name="description"
+                           placeholder="Short description">
+                </div>
+
+                <div class="col-md-3">
+                    <input type="file"
+                           class="form-control"
+                           name="image"
+                           accept=".jpg,.jpeg,.png">
+                </div>
+
+                <div class="col-md-1">
+                    <button type="submit"
+                            class="btn btn-tn-primary w-100">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- CATEGORY LIST -->
+
+    <div class="tn-card p-3">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead>
+
+                    <tr>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Services</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for cat in categories %}
+
+                    <tr>
+
+                        <!-- IMAGE -->
+
+                        <td style="width:80px;">
+
+                            {% if cat.image %}
+
+                            <img src="{{ url_for('static', filename='uploads/' + cat.image) }}"
+                                 style="width:56px; height:56px; object-fit:cover; border-radius:10px;"
+                                 alt="{{ cat.category_name }}">
+
+                            {% else %}
+
+                            <div style="width:56px; height:56px;"
+                                 class="bg-light rounded d-flex align-items-center justify-content-center">
+
+                                <i class="bi bi-image text-secondary"></i>
+
+                            </div>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- EDIT CATEGORY -->
+
+                        <td>
+
+                            <form method="POST"
+                                  action="{{ url_for('edit_category', category_id=cat.id) }}"
+                                  enctype="multipart/form-data">
+
+                                <div class="d-flex flex-wrap gap-2">
+
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           style="width:140px;"
+                                           name="category_name"
+                                           value="{{ cat.category_name }}">
+
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           style="width:160px;"
+                                           name="description"
+                                           value="{{ cat.description or '' }}"
+                                           placeholder="Short description">
+
+                                    <input type="file"
+                                           class="form-control form-control-sm"
+                                           style="width:150px;"
+                                           name="image"
+                                           accept=".jpg,.jpeg,.png">
+
+                                    <button type="submit"
+                                            class="btn btn-tn-outline btn-sm">
+
+                                        <i class="bi bi-check"></i>
+                                        Save
+
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </td>
+
+
+                        <!-- SERVICES -->
+
+                        <td>
+                            {{ cat.service_count }}
+                        </td>
+
+
+                        <!-- DELETE -->
+
+                        <td>
+
+                            <form method="POST"
+                                  action="{{ url_for('delete_category', category_id=cat.id) }}"
+                                  onsubmit="return confirm('Delete this category?');">
+
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm"
+                                        {% if cat.service_count > 0 %}
+                                        disabled
+                                        title="In use by services"
+                                        {% endif %}>
+
+                                    <i class="bi bi-trash"></i>
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="4"
+                            class="text-muted text-center py-4">
+
+                            <i class="bi bi-tags fs-4"></i>
+                            <br>
+                            No categories yet.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

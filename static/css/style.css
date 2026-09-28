@@ -1,0 +1,2266 @@
+/* =========================================================
+   TALENTNEST - MAIN STYLESHEET
+   ========================================================= */
+
+:root {
+    --tn-purple: #6C3EB8;
+    --tn-dark-purple: #51288F;
+    --tn-bg: #FFF8EF;
+    --tn-text: #2E2138;
+    --tn-light-purple: #F2EBFA;
+    --tn-border: #EEEEEE;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+
+    background-color: var(--tn-bg);
+    color: var(--tn-text);
+
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+}
+
+
+/* Hide scrollbars but keep scrolling possible */
+
+html {
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Prevent elements from creating horizontal overflow */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.tn-navbar {
+    background: #ffffff;
+    min-height: 84px;
+
+    border-bottom: 1px solid var(--tn-border);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+
+    position: sticky !important;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+}
+
+.tn-navbar .navbar-brand {
+    color: var(--tn-purple);
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.tn-navbar .nav-link {
+    color: #24123D !important;
+    font-size: 1rem;
+    font-weight: 500;
+
+    padding: 10px 8px !important;
+
+    transition: color 0.2s ease;
+}
+
+.tn-navbar .nav-link:hover {
+    color: var(--tn-purple) !important;
+}
+
+
+/* Register button */
+
+.tn-register-btn {
+    background: var(--tn-purple);
+    color: #ffffff !important;
+
+    border: none;
+    border-radius: 30px;
+
+    padding: 12px 28px !important;
+
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.tn-register-btn:hover {
+    background: var(--tn-dark-purple);
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* Back to Home link */
+
+.back-home-link {
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.back-home-link:hover {
+    color: var(--tn-purple) !important;
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   COMMON INNER PAGE LAYOUT
+   ========================================================= */
+
+.page-container {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 30px 40px 50px;
+
+    box-sizing: border-box;
+}
+
+.page-title {
+    color: var(--tn-dark-purple);
+
+    font-size: 28px;
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.page-title i {
+    color: var(--tn-purple);
+    margin-right: 6px;
+}
+
+.page-subtitle {
+    color: #777777;
+
+    font-size: 15px;
+
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   HOMEPAGE - HERO
+   ========================================================= */
+
+.hero-section {
+    position: relative;
+
+    min-height: 600px;
+
+    display: flex;
+    align-items: center;
+
+    background-image: url("../images/hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(72, 32, 130, 0.92),
+        rgba(108, 62, 184, 0.72),
+        rgba(108, 62, 184, 0.45)
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    max-width: 850px;
+}
+
+.hero-text h1 {
+    color: #ffffff;
+
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.12;
+
+    font-weight: 750;
+
+    margin-bottom: 25px;
+
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    color: #ffffff;
+
+    font-size: 1.2rem;
+    line-height: 1.7;
+
+    max-width: 750px;
+
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    background: #ffffff;
+    color: var(--tn-purple);
+
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+
+    padding: 13px 30px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.hero-btn:hover {
+    background: transparent;
+    color: #ffffff;
+}
+
+.hero-secondary-btn {
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+
+    padding: 11px 25px;
+
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.hero-secondary-btn:hover {
+    background: #ffffff;
+    color: var(--tn-purple);
+}
+
+
+/* =========================================================
+   HOMEPAGE - COMMON SECTION
+   ========================================================= */
+
+.section-heading {
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    color: #3C2460;
+
+    font-size: 2.1rem;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.section-heading p {
+    color: #777777;
+
+    font-size: 1rem;
+
+    margin-bottom: 0;
+}
+
+.section-title {
+    color: var(--tn-dark-purple);
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   HOMEPAGE - CATEGORIES
+   ========================================================= */
+
+.categories-section {
+    background: #ffffff;
+    padding: 90px 0;
+}
+
+.category-card {
+    display: block;
+
+    min-height: 190px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+    text-decoration: none;
+
+    background: #ffffff;
+
+    border: 1px solid var(--tn-border);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(70, 40, 110, 0.07);
+
+    transition: all 0.25s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #D8C6F2;
+
+    box-shadow: 0 15px 35px rgba(108, 62, 184, 0.15);
+}
+
+.category-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--tn-light-purple);
+    color: var(--tn-purple);
+
+    font-size: 1.7rem;
+}
+
+.category-card h5 {
+    color: #342044;
+
+    font-weight: 650;
+
+    margin-bottom: 10px;
+}
+
+.category-card span {
+    color: var(--tn-purple);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HOMEPAGE - HOW IT WORKS
+   ========================================================= */
+
+.how-it-works {
+    background: #FAF8FD;
+    padding: 90px 0;
+}
+
+.steps-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    gap: 0;
+}
+
+.step-item {
+    width: 30%;
+    text-align: center;
+}
+
+.step-circle {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--tn-purple);
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    box-shadow: 0 7px 18px rgba(108, 62, 184, 0.25);
+}
+
+.step-item h5 {
+    color: #352046;
+
+    font-weight: 650;
+
+    margin-bottom: 10px;
+}
+
+.step-item p {
+    color: #777777;
+
+    line-height: 1.6;
+
+    max-width: 260px;
+
+    margin: auto;
+}
+
+.step-line {
+    width: 12%;
+    height: 2px;
+
+    background: #D9CCEC;
+
+    margin-top: 29px;
+}
+
+
+/* =========================================================
+   HOMEPAGE - WHY CHOOSE
+   ========================================================= */
+
+.why-choose {
+    background: #ffffff;
+    padding: 90px 0;
+}
+
+.feature-card {
+    height: 100%;
+
+    padding: 32px 22px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid var(--tn-border);
+    border-radius: 18px;
+
+    box-shadow: 0 7px 22px rgba(60, 35, 90, 0.06);
+
+    transition: all 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 32px rgba(108, 62, 184, 0.12);
+}
+
+.feature-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--tn-light-purple);
+    color: var(--tn-purple);
+
+    font-size: 1.6rem;
+}
+
+.feature-card h5 {
+    color: #352046;
+
+    font-weight: 650;
+
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #777777;
+
+    line-height: 1.6;
+
+    font-size: 0.92rem;
+
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   GENERAL TALENTNEST CARD
+   ========================================================= */
+
+.tn-card {
+    height: 100%;
+
+    background: #ffffff;
+
+    border: none;
+    border-radius: 16px;
+
+    box-shadow: 0 6px 18px rgba(108, 62, 184, 0.12);
+
+    transition: all 0.15s ease;
+}
+
+.tn-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 24px rgba(108, 62, 184, 0.18);
+}
+
+/* =========================================================
+   SERVICE CARD IMAGE
+   ========================================================= */
+
+.tn-card-img {
+    width: 100%;
+    height: 400px;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    background: #f5f1f9;
+}
+/* =========================================================
+   SERVICE CARDS
+   ========================================================= */
+
+.tn-service-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.tn-service-card .card-body {
+    display: flex;
+    flex-direction: column;
+
+    flex-grow: 1;
+}
+
+.tn-service-card .tn-card-footer {
+    margin-top: auto;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-tn-primary {
+    background: var(--tn-purple);
+    border-color: var(--tn-purple);
+
+    color: #ffffff;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+}
+
+.btn-tn-primary:hover {
+    background: var(--tn-dark-purple);
+    border-color: var(--tn-dark-purple);
+
+    color: #ffffff;
+}
+
+.btn-tn-outline {
+    background: transparent;
+
+    border: 2px solid var(--tn-purple);
+    border-radius: 10px;
+
+    color: var(--tn-purple);
+
+    font-weight: 600;
+}
+
+.btn-tn-outline:hover {
+    background: var(--tn-purple);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DASHBOARD STAT CARDS
+   ========================================================= */
+
+.tn-stat-card {
+    padding: 1.5rem;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        var(--tn-purple),
+        var(--tn-dark-purple)
+    );
+
+    border-radius: 16px;
+
+    box-shadow: 0 6px 18px rgba(108, 62, 184, 0.2);
+}
+
+.tn-stat-card h3 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   CATEGORY PILLS
+   ========================================================= */
+
+.tn-category-pill {
+    display: inline-block;
+
+    padding: 0.5rem 1.2rem;
+
+    border: 2px solid var(--tn-purple);
+    border-radius: 50px;
+
+    color: var(--tn-purple);
+
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: all 0.15s ease;
+}
+
+.tn-category-pill:hover {
+    background: var(--tn-purple);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   PROFILE PHOTO
+   ========================================================= */
+
+.tn-avatar {
+    width: 140px;
+    height: 140px;
+
+    object-fit: cover;
+
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 6px 18px rgba(108, 62, 184, 0.25);
+}
+
+.tn-avatar-sm {
+    width: 60px;
+    height: 60px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge-pending {
+    background-color: #F1C40F;
+    color: #4A3B00;
+}
+
+.badge-accepted {
+    background-color: #2ECC71;
+    color: #063D1C;
+}
+
+.badge-rejected {
+    background-color: #E74C3C;
+    color: #ffffff;
+}
+
+.badge-delivered {
+    background-color: #3498DB;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   STAR RATING
+   ========================================================= */
+
+.star-rating .bi-star-fill {
+    color: #F1C40F;
+}
+
+
+/* =========================================================
+   GENERAL HERO CARD
+   ========================================================= */
+
+.tn-hero {
+    padding: 3.5rem 2.5rem;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        var(--tn-purple),
+        var(--tn-dark-purple)
+    );
+
+    border-radius: 24px;
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    width: 100%;
+
+    min-height: calc(100vh - 84px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px;
+
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 30px 36px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(70, 40, 110, 0.10);
+
+    box-sizing: border-box;
+}
+
+
+/* Password eye */
+
+.password-toggle {
+    cursor: pointer;
+    background: #ffffff;
+}
+
+
+/* Login links */
+
+.login-links {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 18px;
+
+    font-size: 0.9rem;
+}
+
+.login-links a {
+    color: var(--tn-purple) !important;
+
+    text-decoration: none !important;
+
+    font-weight: 500;
+}
+
+.login-links a:hover {
+    color: var(--tn-dark-purple) !important;
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   REGISTER PAGE
+   ========================================================= */
+
+.register-page {
+    width: 100%;
+
+    min-height: calc(100vh - 84px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px 20px;
+
+    box-sizing: border-box;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 28px 32px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(70, 40, 110, 0.10);
+
+    box-sizing: border-box;
+}
+
+.register-login-text {
+    text-align: center;
+
+    color: #000000;
+
+    margin-top: 18px;
+    margin-bottom: 0;
+}
+
+.register-login-text a {
+    color: var(--tn-purple) !important;
+
+    text-decoration: none !important;
+
+    font-weight: 600;
+}
+
+.register-login-text a:hover {
+    color: var(--tn-dark-purple) !important;
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   FORGOT / RESET PASSWORD
+   ========================================================= */
+
+.forgot-page {
+    width: 100%;
+
+    min-height: calc(100vh - 84px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px 20px;
+
+    box-sizing: border-box;
+}
+
+.forgot-card {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 28px 30px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(70, 40, 110, 0.10);
+
+    box-sizing: border-box;
+}
+
+.forgot-login-text {
+    text-align: center;
+
+    margin-top: 18px;
+    margin-bottom: 0;
+}
+
+.forgot-login-text a {
+    color: var(--tn-purple) !important;
+
+    text-decoration: none !important;
+
+    font-weight: 600;
+}
+
+.forgot-login-text a:hover {
+    color: var(--tn-dark-purple) !important;
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   CLIENT DASHBOARD
+   ========================================================= */
+
+.client-dashboard {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 25px 30px 50px;
+
+    box-sizing: border-box;
+}
+
+
+/* Welcome Header */
+
+.dashboard-header {
+    margin-bottom: 28px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+
+    color: var(--tn-dark-purple);
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.dashboard-header h2 i {
+    margin-right: 8px;
+    font-size: 27px;
+}
+
+.dashboard-header p {
+    margin: 7px 0 0;
+
+    color: #777;
+
+    font-size: 15px;
+}
+
+
+/* Booking Statistics */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 40px;
+}
+
+.dashboard-stat-card {
+    min-height: 145px;
+
+    padding: 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #7042bd,
+        #542b96
+    );
+
+    color: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 20px rgba(80, 40, 140, 0.15);
+
+    transition: 0.25s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 25px rgba(80, 40, 140, 0.22);
+}
+
+.dashboard-stat-card i {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.dashboard-stat-card h3 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.dashboard-stat-card span {
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+
+/* Explore Student Talent */
+
+.explore-talent {
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 28px 30px;
+
+    box-shadow: 0 5px 20px rgba(70, 40, 110, 0.08);
+}
+
+.explore-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.explore-header h3 {
+    margin: 0;
+
+    color: var(--tn-dark-purple);
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.explore-header h3 i {
+    color: var(--tn-purple);
+    margin-right: 7px;
+}
+
+.explore-header p {
+    margin: 6px 0 0;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.explore-link {
+    color: var(--tn-purple);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.explore-link:hover {
+    color: var(--tn-dark-purple);
+}
+
+
+/* Category pills */
+
+.category-pills {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.category-pill {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 18px;
+
+    background: #ffffff;
+
+    border: 1.5px solid var(--tn-purple);
+
+    border-radius: 30px;
+
+    color: var(--tn-purple);
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.25s ease;
+}
+
+.category-pill:hover {
+    background: var(--tn-purple);
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    text-decoration: none;
+}
+
+.category-pill i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   STUDENT DASHBOARD
+   ========================================================= */
+
+.student-dashboard-stats {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.student-stat-card {
+    min-height: 125px;
+
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow: 0 5px 18px rgba(70, 40, 110, 0.08);
+
+    transition: 0.25s ease;
+}
+
+.student-stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(70, 40, 110, 0.13);
+}
+
+.student-stat-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #f1eaff;
+
+    border-radius: 14px;
+
+    color: var(--tn-purple);
+
+    font-size: 24px;
+}
+
+.student-stat-card h3 {
+    margin: 0;
+
+    color: var(--tn-dark-purple);
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.student-stat-card span {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* Profile Warning */
+
+.profile-warning {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+    padding: 13px 16px;
+
+    background: #fff8e6;
+
+    border: 1px solid #f2d48a;
+
+    border-radius: 12px;
+
+    color: #765b20;
+
+    font-size: 14px;
+}
+
+.profile-warning > i {
+    font-size: 18px;
+}
+
+.profile-warning a {
+    color: var(--tn-purple);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.profile-warning a:hover {
+    color: var(--tn-dark-purple);
+}
+
+
+/* Quick Actions */
+
+.quick-actions {
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 28px 30px;
+
+    box-shadow: 0 5px 20px rgba(70, 40, 110, 0.08);
+}
+
+.quick-actions-header {
+    margin-bottom: 22px;
+}
+
+.quick-actions-header h3 {
+    margin: 0;
+
+    color: var(--tn-dark-purple);
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.quick-actions-header h3 i {
+    color: var(--tn-purple);
+
+    margin-right: 7px;
+}
+
+.quick-actions-header p {
+    margin: 6px 0 0;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.quick-action-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.quick-action-card {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    background: #faf8ff;
+
+    border: 1px solid #eee7fa;
+
+    border-radius: 14px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: 0.25s ease;
+}
+
+.quick-action-card:hover {
+    background: #f4effc;
+
+    border-color: #d8c8f0;
+
+    transform: translateY(-2px);
+
+    text-decoration: none;
+}
+
+.quick-action-card > i:first-child {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #e9ddfa;
+
+    border-radius: 11px;
+
+    color: var(--tn-purple);
+
+    font-size: 20px;
+}
+
+.quick-action-card h5 {
+    margin: 0 0 3px;
+
+    color: #333;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.quick-action-card p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.quick-action-card .action-arrow {
+    margin-left: auto;
+
+    color: var(--tn-purple);
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   STUDENT PROFILE
+   ========================================================= */
+
+.profile-card {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow: 0 5px 20px rgba(70, 40, 110, 0.08);
+
+    box-sizing: border-box;
+}
+
+.profile-layout {
+    display: grid;
+
+    grid-template-columns: 220px 1fr;
+
+    gap: 35px;
+}
+
+.profile-photo-section {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 135px;
+    height: 135px;
+
+    margin: 0 auto 12px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+.profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f2edf9;
+
+    color: #999;
+
+    font-size: 55px;
+}
+
+.photo-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile-form .form-label {
+    color: #444;
+
+    font-weight: 500;
+}
+
+.profile-form .form-control,
+.profile-form .form-select {
+    border-radius: 9px;
+
+    border-color: #ddd;
+}
+
+.profile-form .form-control:focus,
+.profile-form .form-select:focus {
+    border-color: var(--tn-purple);
+
+    box-shadow: 0 0 0 0.15rem rgba(108, 62, 184, 0.12);
+}
+
+
+/* =========================================================
+   MY BOOKINGS
+   ========================================================= */
+
+.bookings-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 20px 25px;
+
+    box-shadow: 0 5px 20px rgba(70, 40, 110, 0.08);
+
+    overflow-x: auto;
+}
+
+.bookings-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.bookings-table th {
+    padding: 14px 10px;
+
+    text-align: left;
+
+    color: #222;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.bookings-table td {
+    padding: 14px 10px;
+
+    color: #333;
+
+    border-bottom: 1px solid #eeeeee;
+
+    vertical-align: middle;
+}
+
+.bookings-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.bookings-table tbody tr:hover {
+    background: #faf7ff;
+}
+
+
+/* Review button */
+
+.review-btn {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border: 1.5px solid var(--tn-purple);
+
+    border-radius: 9px;
+
+    color: var(--tn-purple);
+
+    background: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.review-btn:hover {
+    background: var(--tn-purple);
+    color: #ffffff;
+}
+
+
+/* Reviewed text */
+
+.reviewed-text {
+    color: #666;
+
+    font-size: 14px;
+}
+
+.reviewed-text i {
+    color: #555;
+}
+
+
+/* =========================================================
+   CATEGORIES PAGE
+   ========================================================= */
+
+.categories-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+}
+
+.category-page-card {
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(70, 40, 110, 0.08);
+
+    text-align: center;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.category-page-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(70, 40, 110, 0.14);
+}
+
+.category-page-card img {
+    width: 100%;
+    height: 190px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.category-page-card-content {
+    padding: 14px 15px 16px;
+}
+
+.category-page-card h4 {
+    margin: 0 0 7px;
+
+    color: var(--tn-purple);
+
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.category-page-card p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.tn-footer-full {
+    padding: 55px 0 25px;
+
+    background: #321568;
+
+    color: #ffffff;
+}
+
+.footer-brand {
+    margin-bottom: 12px;
+
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.footer-description {
+    max-width: 320px;
+
+    color: #D8CDE8;
+
+    line-height: 1.6;
+}
+
+.footer-heading {
+    margin-bottom: 18px;
+
+    font-weight: 600;
+}
+
+.footer-links {
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 9px;
+}
+
+.footer-links a {
+    color: #D8CDE8;
+
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-contact {
+    color: #D8CDE8;
+
+    line-height: 1.8;
+}
+
+.footer-bottom {
+    margin-top: 35px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #CFC2DF;
+
+    font-size: 0.9rem;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLETS
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    .tn-navbar .navbar-brand {
+        font-size: 1.7rem;
+    }
+
+    .hero-section {
+        min-height: 540px;
+    }
+
+    .hero-text h1 {
+        font-size: 3.2rem;
+    }
+
+    .steps-wrapper {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 35px;
+    }
+
+    .step-item {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .step-line {
+        width: 2px;
+        height: 35px;
+
+        margin: 0;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .page-container {
+        padding: 25px 25px 45px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .page-container {
+        padding: 25px 20px 40px;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .profile-card {
+        padding: 22px 18px;
+    }
+
+    .explore-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .tn-navbar {
+        min-height: 70px;
+    }
+
+    .tn-navbar .navbar-brand {
+        font-size: 1.6rem;
+    }
+
+    .hero-section {
+        min-height: 520px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .hero-actions {
+        gap: 12px;
+    }
+
+    .categories-section,
+    .how-it-works,
+    .why-choose {
+        padding: 65px 0;
+    }
+
+    .section-heading h2 {
+        font-size: 1.8rem;
+    }
+
+    .page-container {
+        padding: 20px 15px 40px;
+    }
+
+    .page-title {
+        font-size: 23px;
+    }
+
+    .dashboard-header h2 {
+        font-size: 24px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .dashboard-stat-card {
+        min-height: 120px;
+    }
+
+    .student-dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        padding: 22px 18px;
+    }
+
+    .profile-warning {
+        align-items: flex-start;
+    }
+
+    .login-page {
+        min-height: calc(100vh - 70px);
+
+        padding: 20px 15px;
+    }
+
+    .login-card {
+        max-width: 100%;
+
+        padding: 25px 20px;
+    }
+
+    .login-links {
+        font-size: 0.8rem;
+
+        gap: 10px;
+    }
+
+    .register-page {
+        min-height: calc(100vh - 70px);
+
+        padding: 20px 15px;
+    }
+
+    .register-card {
+        max-width: 100%;
+
+        padding: 24px 20px;
+    }
+
+    .forgot-page {
+        min-height: calc(100vh - 70px);
+
+        padding: 20px 15px;
+    }
+
+    .forgot-card {
+        max-width: 100%;
+
+        padding: 24px 20px;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .category-page-card img {
+        height: 180px;
+    }
+
+    .bookings-card {
+        padding: 12px;
+    }
+
+    .bookings-table {
+        min-width: 700px;
+    }
+
+    .explore-talent {
+        padding: 22px 18px;
+    }
+
+    .tn-footer-full {
+        padding: 40px 0 20px;
+    }
+}
+/* =========================================================
+   PENDING BOOKINGS
+   ========================================================= */
+
+.pending-booking-card {
+    background: #ffffff;
+    border: 1px solid var(--tn-border);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(108, 62, 184, 0.08);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pending-booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(108, 62, 184, 0.15);
+}
+
+
+/* TOP */
+
+.pending-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.booking-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--tn-light-purple);
+    color: var(--tn-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.pending-badge {
+    background: #fff4d6;
+    color: #9a6a00;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* SERVICE */
+
+.pending-service-title {
+    color: var(--tn-dark-purple);
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1.35;
+}
+
+
+/* CLIENT */
+
+.booking-client {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #faf8fd;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.client-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--tn-light-purple);
+    color: var(--tn-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.booking-client small {
+    display: block;
+    color: #888;
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.booking-client strong {
+    display: block;
+    color: var(--tn-text);
+    font-size: 14px;
+}
+
+
+/* DETAILS */
+
+.booking-details {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 16px;
+}
+
+.booking-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-width: 0;
+}
+
+.booking-detail > i {
+    color: var(--tn-purple);
+    font-size: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.booking-detail small {
+    display: block;
+    color: #999;
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.booking-detail span {
+    display: block;
+    color: var(--tn-text);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+
+/* MESSAGE */
+
+.booking-message {
+    background: #faf8fd;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.message-title {
+    color: var(--tn-dark-purple);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.message-title i {
+    color: var(--tn-purple);
+    margin-right: 4px;
+}
+
+.booking-message p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+
+/* REFERENCE IMAGE */
+
+.reference-section {
+    margin-bottom: 15px;
+}
+
+.reference-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+/* BOOKING REFERENCE */
+
+.booking-reference {
+    background: #f7f3fb;
+    color: var(--tn-dark-purple);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    margin-bottom: 16px;
+    overflow-wrap: anywhere;
+}
+
+.booking-reference i {
+    color: var(--tn-purple);
+}
+
+
+/* ACTION BUTTONS */
+
+.booking-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 5px;
+}
+
+.booking-actions form {
+    flex: 1;
+}
+
+.accept-booking-btn,
+.reject-booking-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accept-booking-btn {
+    background: var(--tn-purple);
+    color: #ffffff;
+}
+
+.accept-booking-btn:hover {
+    background: var(--tn-dark-purple);
+    color: #ffffff;
+}
+
+.reject-booking-btn {
+    background: #ffffff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.reject-booking-btn:hover {
+    background: #dc3545;
+    color: #ffffff;
+}
+
+
+/* EMPTY STATE */
+
+.empty-bookings-card {
+    background: #ffffff;
+    border: 1px solid var(--tn-border);
+    border-radius: 18px;
+    padding: 60px 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(108, 62, 184, 0.07);
+}
+
+.empty-booking-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--tn-light-purple);
+    color: var(--tn-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 30px;
+}
+
+.empty-bookings-card h4 {
+    color: var(--tn-dark-purple);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.empty-bookings-card p {
+    color: #888;
+    margin: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .pending-booking-card {
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .pending-booking-card {
+        padding: 18px;
+        border-radius: 15px;
+    }
+
+    .pending-service-title {
+        font-size: 17px;
+    }
+
+    .booking-actions {
+        flex-direction: column;
+    }
+
+    .accept-booking-btn,
+    .reject-booking-btn {
+        padding: 11px;
+    }
+
+}

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- Page Title -->
+    <h2 class="page-title">
+        <i class="bi bi-journal-check"></i>
+        My Bookings
+    </h2>
+
+
+    <!-- Bookings Table -->
+    <div class="bookings-card">
+
+        <div class="table-responsive">
+
+            <table class="bookings-table">
+
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Student</th>
+                        <th>Required Date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for b in bookings %}
+
+                    <tr>
+
+                        <td>
+                            {{ b.service_name }}
+                        </td>
+
+                        <td>
+                            {{ b.student_name }}
+                        </td>
+
+                        <td>
+                            {{ b.required_date }}
+                        </td>
+
+                        <td>
+
+                            {% if b.status == 'Pending' %}
+
+                                <span class="badge badge-pending">
+                                    Pending
+                                </span>
+
+                            {% elif b.status == 'Accepted' %}
+
+                                <span class="badge badge-accepted">
+                                    Accepted
+                                </span>
+
+                            {% elif b.status == 'Rejected' %}
+
+                                <span class="badge badge-rejected">
+                                    Rejected
+                                </span>
+
+                            {% elif b.status == 'Delivered' %}
+
+                                <span class="badge badge-delivered">
+                                    Delivered
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if b.status == 'Delivered' %}
+
+                                {% if b.booking_id in reviewed_ids %}
+
+                                    <span class="reviewed-text">
+                                        <i class="bi bi-check-circle"></i>
+                                        Reviewed
+                                    </span>
+
+                                {% else %}
+
+                                    {% if b.status == 'Delivered' and b.booking_id not in reviewed_ids %}
+
+                                    <a href="{{ url_for('review', booking_id=b.booking_id) }}"
+                                    class="btn btn-tn-primary">
+                                        <i class="bi bi-star"></i>
+                                        Review
+                                    </a>
+
+                                    {% elif b.status == 'Delivered' and b.booking_id in reviewed_ids %}
+
+                                    <span class="text-success">
+                                        <i class="bi bi-check-circle"></i>
+                                        Reviewed
+                                    </span>
+
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="text-muted text-center py-4">
+
+                            You haven't made any bookings yet.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

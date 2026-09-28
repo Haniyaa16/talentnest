@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Register - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="tn-card p-4">
+
+            <h3 class="section-title text-center mb-4">
+                <i class="bi bi-person-plus"></i> Create Account
+            </h3>
+
+            <form method="POST"
+                  action="{{ url_for('register') }}"
+                  enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text"
+                           class="form-control"
+                           name="full_name"
+                           value="{{ form.get('full_name', '') }}"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email"
+                           class="form-control"
+                           name="email"
+                           value="{{ form.get('email', '') }}"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="text"
+                           class="form-control"
+                           name="phone"
+                           value="{{ form.get('phone', '') }}"
+                           required>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Password</label>
+
+                        <div class="input-group">
+                            <input type="password"
+                                   class="form-control"
+                                   name="password"
+                                   id="regPassword"
+                                   required>
+
+                            <span class="input-group-text"
+                                  style="cursor: pointer;"
+                                  onclick="togglePasswordVisibility('regPassword', 'regPasswordIcon')">
+
+                                <i class="bi bi-eye"
+                                   id="regPasswordIcon"></i>
+
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Confirm Password</label>
+
+                        <div class="input-group">
+                            <input type="password"
+                                   class="form-control"
+                                   name="confirm_password"
+                                   id="regConfirmPassword"
+                                   required>
+
+                            <span class="input-group-text"
+                                  style="cursor: pointer;"
+                                  onclick="togglePasswordVisibility('regConfirmPassword', 'regConfirmPasswordIcon')">
+
+                                <i class="bi bi-eye"
+                                   id="regConfirmPasswordIcon"></i>
+
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Role -->
+                <div class="mb-4">
+
+                    <label class="form-label d-block">
+                        I want to join as :
+                    </label>
+
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input"
+                               type="radio"
+                               name="role"
+                               id="roleStudent"
+                               value="student"
+                               {% if form.get('role') == 'student' %}checked{% endif %}
+                               required>
+
+                        <label class="form-check-label"
+                               for="roleStudent">
+
+                            <i class="bi bi-mortarboard"></i>
+                            Student
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input"
+                               type="radio"
+                               name="role"
+                               id="roleClient"
+                               value="client"
+                               {% if form.get('role') == 'client' %}checked{% endif %}
+                               required>
+
+                        <label class="form-check-label"
+                               for="roleClient">
+
+                            <i class="bi bi-person"></i>
+                            Client
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+        <!-- Oxford College ID Card -->
+        <div class="mb-4">
+
+            <label class="form-label">
+                Oxford College ID Card
+            </label>
+
+            <input type="file"
+                  class="form-control"
+                  name="college_id_card"
+                  accept=".jpg,.jpeg,.png"
+                  required>
+
+            <small class="text-muted">
+                Upload a clear image of your Oxford College ID card.
+            </small>
+
+        </div>
+
+
+                <button type="submit"
+                        class="btn btn-tn-primary w-100">
+
+                    Register
+
+                </button>
+
+            </form>
+
+            <p class="register-login-text">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Login here
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const roleStudent = document.getElementById("roleStudent");
+    const roleClient = document.getElementById("roleClient");
+    const studentIdCardField = document.getElementById("studentIdCardField");
+
+    function updateIdCardField() {
+
+        if (roleStudent.checked) {
+
+            studentIdCardField.classList.remove("d-none");
+
+        } else {
+
+            studentIdCardField.classList.add("d-none");
+
+        }
+
+    }
+
+    roleStudent.addEventListener("change", updateIdCardField);
+    roleClient.addEventListener("change", updateIdCardField);
+
+    // Keep the field visible if the form reloads after a validation error
+    updateIdCardField();
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.category_name }} - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h3 class="page-title">
+        <i class="bi bi-tag"></i> {{ category.category_name }}
+    </h3>
+
+    <p class="page-subtitle">
+        Explore students offering {{ category.category_name }} services.
+    </p>
+
+    <!-- Student Search -->
+
+<div class="tn-card p-3 mb-4">
+
+    <div class="input-group">
+
+        <span class="input-group-text bg-white">
+            <i class="bi bi-search"></i>
+        </span>
+
+        <input type="text"
+               id="studentSearch"
+               class="form-control"
+               placeholder="Search students...">
+
+    </div>
+
+</div>
+
+    <div class="row g-4">
+
+        {% for s in students %}
+
+        <div class="col-md-4 student-item">
+
+           <a href="{{ url_for('view_student', student_user_id=s.user_id, category_id=category.id) }}"
+              class="text-decoration-none text-dark">
+                <div class="tn-card p-4 text-center h-100">
+
+                    {% if s.photo %}
+
+                        <img src="{{ url_for('static', filename='uploads/' + s.photo) }}"
+                             class="tn-avatar mx-auto mb-3"
+                             alt="{{ s.full_name }}">
+
+                    {% else %}
+
+                        <div class="tn-avatar mx-auto mb-3 d-flex align-items-center justify-content-center bg-light">
+                            <i class="bi bi-person fs-1 text-secondary"></i>
+                        </div>
+
+                    {% endif %}
+
+                    <h5>{{ s.full_name }}</h5>
+
+            <p class="text-muted mb-1">
+                <i class="bi bi-building"></i>
+                Oxford College
+            </p>
+
+            <p class="text-muted mb-1">
+                <i class="bi bi-geo-alt"></i>
+                Kozhikode
+            </p>
+
+
+                </div>
+
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+            <div class="tn-card p-4 text-center">
+                <i class="bi bi-people fs-1 text-secondary"></i>
+                <p class="text-muted mt-2 mb-0">
+                    No students in this category yet.
+                </p>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById("studentSearch").addEventListener("keyup", function () {
+
+    const searchValue = this.value.toLowerCase();
+
+    document.querySelectorAll(".student-item").forEach(function (item) {
+
+        const studentName = item.textContent.toLowerCase();
+
+        if (studentName.includes(searchValue)) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+
+    });
+
+});
+</script>
+
+{% endblock %}

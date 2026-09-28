@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - TalentNest{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h2 class="page-title">
+        <i class="bi bi-person-badge"></i>
+        My Profile
+    </h2>
+
+    <p class="page-subtitle">
+        Keep your student profile updated so clients can discover your talent.
+    </p>
+
+
+    <div class="profile-card">
+
+        <form method="POST"
+              action="{{ url_for('student_profile') }}"
+              enctype="multipart/form-data">
+
+            <div class="profile-layout">
+
+
+                <!-- Profile Photo -->
+                <div class="profile-photo-section">
+
+                    {% if profile and profile.photo %}
+
+                        <img src="{{ url_for('static', filename='uploads/' + profile.photo) }}"
+                             class="tn-avatar profile-avatar"
+                             alt="Profile photo">
+
+                    {% else %}
+
+                        <div class="tn-avatar profile-avatar profile-placeholder">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                    {% endif %}
+
+                    <label class="photo-label">
+                        Profile Photo
+                    </label>
+
+                    <input type="file"
+                           class="form-control form-control-sm"
+                           name="photo"
+                           accept=".jpg,.jpeg,.png">
+
+                </div>
+
+
+
+                <!-- Profile Information -->
+                <div class="profile-form">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            About Yourself
+                        </label>
+
+                        <textarea class="form-control"
+                                  name="about"
+                                  rows="3">{{ profile.about if profile else '' }}</textarea>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                College Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   value="Oxford College"
+                                   readonly>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Branch / Department
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="branch"
+                                   value="{{ profile.branch if profile else '' }}"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Year / Semester
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="year_sem"
+                                   value="{{ profile.year_sem if profile else '' }}"
+                                   placeholder="e.g. 2nd Year / Sem 4"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+    <label for="graduation_year" class="form-label">
+        Expected Graduation Year
+    </label>
+
+<input
+    type="number"
+    class="form-control"
+    id="graduation_year"
+    name="graduation_year"
+    min="2020"
+    max="2100"
+    placeholder="e.g. 2026"
+    value="{{ profile.graduation_year if profile and profile.graduation_year else '' }}"
+    required
+>
+</div>
+
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            Location
+                        </label>
+
+                        <input type="text"
+                            class="form-control"
+                            value="Kozhikode"
+                            readonly>
+                    </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Category
+                            </label>
+
+                            <select class="form-select"
+                                    id="category"
+                                    name="category"
+                                    required>
+
+                                <option value=""
+                                        disabled
+                                        {% if not profile or not profile.category_id %}
+                                        selected
+                                        {% endif %}>
+
+                                    -- Select Category --
+
+                                </option>
+
+
+                                {% for cat in categories %}
+
+                                    <option value="{{ cat.id }}"
+                                            {% if profile and profile.category_id == cat.id %}
+                                            selected
+                                            {% endif %}>
+
+                                        {{ cat.category_name }}
+
+                                    </option>
+
+                                {% endfor %}
+
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+
+                            <div id="otherCategoryWrapper"
+                                 class="d-none mt-2">
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="other_category"
+                                       name="other_category"
+                                       placeholder="Enter your category">
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <!-- College ID Card -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Oxford College ID Card
+                        </label>
+
+                        {% if user_college_id_card %}
+
+                            <div class="mb-2">
+
+                                <img src="{{ url_for('static', filename='uploads/' + user_college_id_card) }}"
+                                     class="img-fluid rounded border"
+                                     style="max-width: 300px; max-height: 200px; object-fit: contain;"
+                                     alt="Oxford College ID Card">
+
+                            </div>
+
+                            <p class="mb-2">
+
+                                {% if verification_status == "Pending" %}
+
+                                    <span class="badge bg-warning text-dark">
+                                        ID Verification Pending
+                                    </span>
+
+                                {% elif verification_status == "Approved" %}
+
+                                    <span class="badge bg-success">
+                                        ID Verified
+                                    </span>
+
+                                {% elif verification_status == "Rejected" %}
+
+                                    <span class="badge bg-danger">
+                                        ID Rejected - Upload Again
+                                    </span>
+
+                                {% endif %}
+
+                            </p>
+
+                        {% endif %}
+
+
+                        <input type="file"
+                               class="form-control"
+                               name="college_id_card"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small class="text-muted">
+                            Upload a clear image of your Oxford College ID card.
+                        </small>
+
+                    </div>
+
+
+
+                    <button type="submit"
+                            class="btn btn-tn-primary mt-2">
+
+                        <i class="bi bi-check-circle"></i>
+                        Save Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
